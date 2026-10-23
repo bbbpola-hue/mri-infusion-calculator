@@ -94,7 +94,7 @@ button.ok{margin-left:6px;padding:4px 10px}
 </div>
 <div class="box row" id="pickbar" hidden></div>
 <div id="view"></div>
-<p class="mu">ให้ยาทุก 14 วัน · ช่วง MRI = 7 วันก่อนให้ยาครั้งที่ 5, 7, 14 · ถ้าแก้วันให้ยาจริง ครั้งถัดไปจะเลื่อนตามอัตโนมัติ</p>
+<p class="mu">ให้ยาทุก 14 วัน · ช่วง MRI = วันถัดจากให้ยาครั้งก่อนหน้า ถึงวันก่อนให้ยาครั้งที่ 5, 7, 14 (และ 3 ถ้าเลือก) · ถ้าแก้วันให้ยาจริง ครั้งถัดไปจะเลื่อนตามอัตโนมัติ</p>
 </div>
 <div id="sheet" aria-hidden="true"></div>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -134,8 +134,9 @@ function calc(){
   if(S.opt3)mriDoses.unshift(3);
   mriDoses.forEach(k=>{
     const doseRow=doses[k-1];
-    const to=doseRow.a||doseRow.e;
-    const from=add(to,-7);
+    const prev=doses[k-2];
+    const to=add(doseRow.a||doseRow.e,-1);
+    const from=add(prev.a||prev.e,1);
     const a=S.mri[k]||'';
     mris.push({k,from,to,a})
   });
@@ -190,7 +191,7 @@ function sheetHtml(c){
   return `<div class="sh-h"><div><b>ตารางให้ยาและนัดตรวจ MRI</b><br>ผู้ป่วย / HN: ${esc(S.name)||'..................................'}</div>
     <div class="sh-r">วันให้ยาครั้งแรก: ${th(S.start)}<br>พิมพ์เมื่อ: ${th(today)}</div></div>
     <table><tr><th>#</th><th>รายการ</th><th>วันนัดตามแผน</th><th>วันที่ทำจริง</th><th>ลงชื่อ / หมายเหตุ</th></tr>${rows}</table>
-    <p class="sh-f">ให้ยาทุก 14 วัน รวม ${TOTAL} ครั้ง · ช่วง MRI คือ 7 วันก่อนวันให้ยาครั้งที่ ${c.m.map(m=>m.k).join(', ')} · วันนัดตามแผนคำนวณต่อจากวันให้ยาจริงครั้งล่าสุด</p>`;
+    <p class="sh-f">ให้ยาทุก 14 วัน รวม ${TOTAL} ครั้ง · ช่วง MRI คือระหว่างวันให้ยาครั้งก่อนหน้า กับวันให้ยาครั้งที่ ${c.m.map(m=>m.k).join(', ')} · วันนัดตามแผนคำนวณต่อจากวันให้ยาจริงครั้งล่าสุด</p>`;
 }
 function buildSheet(){$('sheet').innerHTML=sheetHtml(calc())}
 $('print').onclick=()=>{buildSheet();window.print()};

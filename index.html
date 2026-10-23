@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ตารางให้ยา Leqembi และนัด MRI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--fg:#2a2230;--mu:#7a8195;--line:#bbc4ca;--plum:#692145;--purple:#555195;--navy:#2f2b75;--tint:#eceaf5;--tint2:#f6f4f8;--on-brand:#fff;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1720;--fg:#efeaf2;--mu:#a9afbf;--line:#4a4452;--plum:#c0668f;--purple:#8e89d8;--navy:#b7b3f0;--tint:#2b2740;--tint2:#231e29}}
+:root[data-theme="dark"]{--bg:#1b1720;--fg:#efeaf2;--mu:#a9afbf;--line:#4a4452;--plum:#c0668f;--purple:#8e89d8;--navy:#b7b3f0;--tint:#2b2740;--tint2:#231e29}
+*,*:before,*:after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--fg);font:300 15px/1.6 "Montserrat","Kanit",Tahoma,sans-serif}
+b,strong,th{font-weight:500}
+.w{max-width:880px;margin:auto;padding:0 16px 24px}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:18px 0 14px;border-bottom:3px solid var(--plum);position:relative}
+header:after{content:"";position:absolute;left:0;bottom:-7px;width:38%;height:4px;background:var(--purple)}
+h1{font:500 19px/1.3 "Kanit",sans-serif;margin:0;color:var(--plum)}
+.box{border:1px solid var(--line);border-radius:6px;padding:12px 14px;margin:14px 0;background:var(--bg)}
+#next{border-left:6px solid var(--plum);background:var(--tint2)}
+.row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+button,input,select{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:6px 12px;cursor:pointer}
+button:hover{border-color:var(--plum);color:var(--plum)}
+button.on{background:var(--plum);border-color:var(--plum);color:var(--on-brand);font-weight:500}
+#vList,#vCal{border-radius:18px;padding:5px 18px}
+button:disabled,input:disabled{opacity:.4;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+input[type=checkbox]{accent-color:var(--plum);width:16px;height:16px;padding:0;vertical-align:-3px}
+.mu{color:var(--mu);font-size:13px}
+.warn{font-weight:500;color:var(--plum)}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:middle}
+th{color:var(--mu);font-size:13px}
+tr.m td{background:var(--tint)}
+tr.m td:first-child{color:var(--purple);font-weight:500}
+input.has{background:var(--plum);border-color:var(--plum);color:var(--on-brand);font-weight:500}
+tr.m input.has{background:var(--purple);border-color:var(--purple)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);min-width:560px}
+.cal>div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:78px;padding:4px;font-size:12px}
+.cal .hd{min-height:0;font-weight:500;text-align:center;color:var(--mu);padding:6px}
+.cal .win{background:var(--tint)}
+.cal .x .dn{opacity:.35}
+.cal>div[data-day]{cursor:pointer}
+.cal>div[data-day]:hover{background:var(--tint2)}
+.cal .dn{display:inline-block;min-width:26px;height:26px;line-height:24px;text-align:center;border-radius:50%;border:1.5px solid transparent}
+.cal .today .dn{border-color:var(--plum);color:var(--plum);font-weight:500}
+.cal>div.on{box-shadow:inset 0 0 0 2px var(--plum)}
+.cal .on .dn{background:var(--plum);color:var(--on-brand);border-color:var(--plum);font-weight:500}
+.tag{display:block;width:100%;text-align:left;font-size:11px;padding:1px 5px;margin-top:3px;border-radius:3px}
+.tag.dp{background:var(--bg);color:var(--plum);border:1.5px solid var(--plum)}
+.tag.da{background:var(--plum);color:var(--on-brand);border:1.5px solid var(--plum);font-weight:500}
+.tag.mp{background:var(--bg);color:var(--purple);border:1.5px dashed var(--purple)}
+.tag.ma{background:var(--purple);color:var(--on-brand);border:1.5px solid var(--purple);font-weight:500}
+.tag.old{opacity:.5;text-decoration:line-through}
+.tag.sel{outline:3px solid var(--navy);outline-offset:1px}
+.lg{display:inline-block;width:auto;margin:0 4px 0 10px;cursor:default}
+#pickbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:2;background:var(--tint);border-color:var(--purple)}
+.cal-h{margin:14px 0}.cal-h b{font:500 17px "Kanit",sans-serif;color:var(--plum);min-width:150px;text-align:center}
+#sheet{position:fixed;left:-10000px;top:0;width:794px;padding:40px 44px;background:#fff;color:#1d1a20;font:300 12px/1.45 "Montserrat","Kanit",sans-serif}
+#sheet .sh-h{display:flex;gap:16px;align-items:center;border-bottom:3px solid #692145;padding-bottom:10px;margin-bottom:12px}
+#sheet .sh-h b{font:500 16px "Kanit",sans-serif;color:#692145}
+#sheet .sh-r{margin-left:auto;text-align:right;color:#555}
+#sheet table{min-width:0;border-collapse:collapse;width:100%}
+#sheet th{background:#692145;color:#fff;font-size:11.5px;padding:5px 7px;border:none}
+#sheet td{padding:4px 7px;border-bottom:1px solid #bbc4ca;height:23px}
+#sheet td:nth-child(4){border-left:1px solid #bbc4ca;border-right:1px solid #bbc4ca;width:130px}
+#sheet td:first-child{width:32px;text-align:center}#sheet td:last-child{width:150px}
+#sheet tr.sm td{background:#eceaf5;color:#2f2b75;font-weight:500}
+#sheet .sh-f{color:#7a8195;font-size:10.5px;margin-top:10px}
+@media print{@page{size:A4;margin:0}body>*:not(#sheet){display:none!important}#sheet{position:static;width:auto;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style></head><body><div class="w">
+<header>
+  <h1>ตารางให้ยา Leqembi และนัด MRI</h1>
+</header>
+
+<div class="box row">
+  <label>ชื่อ / HN <input id="name" placeholder="เช่น HN 123456"></label>
+  <label>วันให้ยาครั้งแรก <input type="date" id="start"></label>
+  <label><input type="checkbox" id="opt3"> MRI ก่อนครั้งที่ 3</label>
+  <button id="reset">ล้างข้อมูล</button>
+</div>
+
+<div class="box" id="next"></div>
+
+<div class="row" style="margin-top:6px">
+  <button id="vList" class="on">รายการ</button>
+  <button id="vCal">ปฏิทิน</button>
+  <span style="flex:1"></span>
+  <button id="print">พิมพ์</button>
+  <button id="pdf" class="on">ส่งออก PDF</button>
+</div>
+<div class="box row" id="pickbar" hidden></div>
+<div id="view"></div>
+<p class="mu">ให้ยาทุก 14 วัน · ช่วง MRI = 7 วันก่อนให้ยาครั้งที่ 5, 7, 14 · ถ้าแก้วันให้ยาจริง ครั้งถัดไปจะเลื่อนตามอัตโนมัติ</p>
+</div>
+<div id="sheet" aria-hidden="true"></div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script>
+const TOTAL=14;
+const today=(d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`)(new Date());
+let view='list',chooseDay=null,pick=null,calM=null;
+const $=id=>document.getElementById(id);
+const blank=()=>({name:'',start:'',dose:{},mri:{},opt3:false});
+let S=blank();
+const save=()=>{try{localStorage.leqembi=JSON.stringify(S)}catch(e){}};
+const load=()=>{try{const o=JSON.parse(localStorage.leqembi||'null');S=Object.assign(blank(),o&&typeof o==='object'?o:{});S.dose=S.dose||{};S.mri=S.mri||{};S.name=S.name||''}catch(e){S=blank()}};
+load();
+const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const add=(d,n)=>new Date(new Date(d+'T00:00:00Z').getTime()+n*86400000).toISOString().slice(0,10);
+const diff=(a,b)=>Math.floor((new Date(a+'T00:00:00Z')-new Date(b+'T00:00:00Z'))/86400000);
+const th=d=>{const [y,m,da]=d.split('-');return `${da}/${m}/${+y+543}`};
+function nextBox(c){
+  $('next').innerHTML='';if(!c||!c.start)return;
+  let txt=`วันให้ยาครั้งแรก: <b>${th(c.start)}</b>`;
+  if(c.last)txt+=` · วันให้ยาครั้งล่าสุด: <b>${th(c.last)}</b>`;
+  $('next').innerHTML=`<span class="warn">ℹ</span>${txt}`
+}
+function calc(){
+  const doses=[],mris=[];
+  if(!S.start)return {d:doses,m:mris,start:S.start};
+  let last=S.start,k=1;
+  for(let n=1;n<=TOTAL;n++){
+    const p=add(S.start,(n-1)*14);
+    const a=S.dose[n]||'';
+    const e=add(last,(n-k)*14);
+    doses.push({n,p,a,e});
+    if(a){last=a;k=n}
+  }
+  const mriDoses=[5,7,14];
+  if(S.opt3)mriDoses.unshift(3);
+  mriDoses.forEach(k=>{
+    const doseRow=doses[k-1];
+    const to=doseRow.a||doseRow.e;
+    const from=add(to,-7);
+    const a=S.mri[k]||'';
+    mris.push({k,from,to,a})
+  });
+  return {d:doses,m:mris,start:S.start,last:last}
+}
+function listView(c){
+  let h='<div class="scroll"><table><tr><th>#</th><th>วันนัด</th><th>วันทำจริง</th><th>MRI</th></tr>';
+  c.d.forEach(x=>{
+    const mm=c.m.find(m=>m.k===x.n);
+    if(mm)h+=`<tr class="m"><td colspan="4"><b>ตรวจ MRI ก่อนให้ยาครั้งที่ ${mm.k}</b><br>ระหว่าง ${th(mm.from)} ถึง ${th(mm.to)} &nbsp; <input type="date" data-t="mri" data-n="${mm.k}" value="${mm.a}" placeholder="ยังไม่ได้ทำ"></td></tr>`;
+    h+=`<tr><td>${x.n}</td><td>${th(x.e)}</td><td><input type="date" data-t="dose" data-n="${x.n}" value="${x.a}"></td><td>${x.p!==x.e?'⚠️ เลื่อน':''}</td></tr>`
+  });
+  h+='</table></div>';
+  $('view').innerHTML=h
+}
+function calView(c){
+  if(!calM)calM=initCalM(c);
+  const m0=calM+'-01',s0=add(m0,-new Date(m0+'T00:00:00Z').getUTCDay());
+  const ev={};const put=(d,o)=>(ev[d]=ev[d]||[]).push(o);
+  c.d.forEach(x=>{if(x.a){put(x.a,{t:'dose',n:x.n,c:'da',l:`✓ ยา #${x.n}`});if(x.a!==x.e)put(x.e,{t:'dose',n:x.n,c:'dp old',l:`แผน ยา #${x.n}`})}
+    else put(x.e,{t:'dose',n:x.n,c:'dp',l:`ยา #${x.n}`})});
+  c.m.forEach(m=>m.a?put(m.a,{t:'mri',n:m.k,c:'ma',l:`✓ MRI #${m.k}`}):put(m.from,{t:'mri',n:m.k,c:'mp',l:`ช่วง MRI #${m.k}`}));
+  const inWin=d=>c.m.some(m=>d>=m.from&&d<=m.to);
+  let h=`<div class="row cal-h"><button data-nav="-1">‹</button><b>${new Date(m0+'T00:00:00Z').toLocaleDateString('th-TH',{month:'long',year:'numeric',timeZone:'UTC'})}</b><button data-nav="1">›</button></div><div class="scroll"><div class="cal">`;
+  'อา จ อ พ พฤ ศ ส'.split(' ').forEach(d=>h+=`<div class="hd">${d}</div>`);
+  for(let i=0;i<42;i++){const d=add(s0,i);
+    h+=`<div data-day="${d}" class="${inWin(d)?'win ':''}${d.slice(0,7)!==calM?'x ':''}${d===today?'today ':''}${d===chooseDay?'on':''}"><span class="dn">${+d.slice(8)}</span>`+
+      (ev[d]||[]).map(o=>`<button class="tag ${o.c} ${pick&&pick.t===o.t&&+pick.n===o.n?'sel':''}" data-pt="${o.t}" data-pn="${o.n}">${o.l}</button>`).join('')+'</div>'}
+  $('view').innerHTML=h+'</div></div><p class="mu"><span class="tag dp lg">ยา #</span>วันให้ยาตามที่ระบบคำนวณ<span class="tag da lg">✓ ยา #</span>วันให้ยาจริง<br><span class="tag mp lg">ช่วง MRI</span>ช่วง MRI ตามที่ระบบคำนวณ (พื้นเทา)<span class="tag ma lg">✓ MRI</span>วัน MRI จริง<br>วิธีบันทึก: แตะวันที่ในปฏิทิน แล้วเลือกว่าเป็นการให้ยาหรือ MRI ครั้งไหน</p>';
+}
+function initCalM(c){const f=c.d[0].e,l=c.d[TOTAL-1].a||c.d[TOTAL-1].e;return(today>=add(f,-7)&&today<=l?today:f).slice(0,7)}
+function render(){
+  if($('name').value!==S.name)$('name').value=S.name;$('start').value=S.start;$('opt3').checked=S.opt3;
+  $('pdf').disabled=$('print').disabled=!S.start;$('start').value=S.start;$('opt3').checked=S.opt3;
+  $('vList').classList.toggle('on',view==='list');$('vCal').classList.toggle('on',view==='cal');
+  const pb=$('pickbar');pb.hidden=!pick;
+  pb.hidden=!pick&&!chooseDay;
+  if(chooseDay&&S.start){const c=calc(),near=c.d.filter(x=>!x.a).sort((a,b)=>Math.abs(diff(a.e,chooseDay))-Math.abs(diff(b.e,chooseDay))).slice(0,2);
+    pb.innerHTML=`บันทึก <b>${th(chooseDay)}</b> เป็น:`+near.map(x=>`<button data-as="dose|${x.n}">ให้ยาครั้งที่ ${x.n}</button>`).join('')+
+      c.m.filter(m=>!m.a).map(m=>`<button data-as="mri|${m.k}">MRI ก่อนครั้งที่ ${m.k}</button>`).join('')+'<button id="cancel">ยกเลิก</button>'}
+  else if(pick)pb.innerHTML=`เลือก ${pick.t==='dose'?'ให้ยาครั้งที่':'MRI ก่อนครั้งที่'} ${pick.n} แล้ว แตะวันที่ในปฏิทินเพื่อบันทึกวันจริง <button id="unset">ใช้วันตามแผน</button><button id="cancel">ยกเลิก</button>`;
+  if(!S.start){nextBox();$('view').innerHTML='';return}
+  const c=calc();nextBox(c);view==='list'?listView(c):calView(c);
+}
+function setDate(t,n,v){const o=t==='dose'?S.dose:S.mri;v?o[n]=v:delete o[n];save();render()}
+
+$('name').oninput=e=>{S.name=e.target.value;save()};
+function sheetHtml(c){
+  let rows='';c.d.forEach(x=>{const mm=c.m.find(m=>m.k===x.n);
+    if(mm)rows+=`<tr class="sm"><td>MRI</td><td>ตรวจ MRI ก่อนให้ยาครั้งที่ ${mm.k}</td><td>${th(mm.from)} – ${th(mm.to)}</td><td>${mm.a?th(mm.a):''}</td><td></td></tr>`;
+    rows+=`<tr><td>${x.n}</td><td>ให้ยาครั้งที่ ${x.n}</td><td>${th(x.e)}</td><td>${x.a?th(x.a):''}</td><td></td></tr>`});
+  return `<div class="sh-h"><div><b>ตารางให้ยาและนัดตรวจ MRI</b><br>ผู้ป่วย / HN: ${esc(S.name)||'..................................'}</div>
+    <div class="sh-r">วันให้ยาครั้งแรก: ${th(S.start)}<br>พิมพ์เมื่อ: ${th(today)}</div></div>
+    <table><tr><th>#</th><th>รายการ</th><th>วันนัดตามแผน</th><th>วันที่ทำจริง</th><th>ลงชื่อ / หมายเหตุ</th></tr>${rows}</table>
+    <p class="sh-f">ให้ยาทุก 14 วัน รวม ${TOTAL} ครั้ง · ช่วง MRI คือ 7 วันก่อนวันให้ยาครั้งที่ ${c.m.map(m=>m.k).join(', ')} · วันนัดตามแผนคำนวณต่อจากวันให้ยาจริงครั้งล่าสุด</p>`;
+}
+function buildSheet(){$('sheet').innerHTML=sheetHtml(calc())}
+$('print').onclick=()=>{buildSheet();window.print()};
+$('pdf').onclick=async()=>{
+  const b=$('pdf');b.disabled=true;b.textContent='กำลังสร้าง PDF…';
+  try{
+    buildSheet();try{await document.fonts.ready}catch(e){}
+    if(!window.html2canvas||!window.jspdf){window.print();return}
+    const sh=$('sheet'),cv=await html2canvas(sh,{scale:2,backgroundColor:'#ffffff',width:sh.offsetWidth,windowWidth:sh.offsetWidth});
+    const pdf=new jspdf.jsPDF({unit:'mm',format:'a4'}),W=210,H=297,ph=Math.floor(cv.width*H/W);
+    for(let y=0,i=0;y<cv.height;y+=ph,i++){const c2=document.createElement('canvas');c2.width=cv.width;c2.height=Math.min(ph,cv.height-y);
+      c2.getContext('2d').drawImage(cv,0,-y);if(i)pdf.addPage();pdf.addImage(c2.toDataURL('image/jpeg',.92),'JPEG',0,0,W,c2.height*W/cv.width)}
+    const fn='LEQEMBI-'+((S.name||'schedule').trim().replace(/[^\w\u0E00-\u0E7F-]+/g,'_'))+'.pdf';
+    pdf.save(fn);
+  }catch(e){console.error(e);alert('บันทึกไฟล์ไม่สำเร็จ ลองใช้ปุ่ม "พิมพ์" แล้วเลือกบันทึกเป็น PDF แทน')}
+  finally{b.disabled=!S.start;b.textContent='ส่งออก PDF'}
+};
+$('start').onchange=e=>{S.start=e.target.value;calM=null;save();render()};
+$('opt3').onchange=e=>{S.opt3=e.target.checked;save();render()};
+$('reset').onclick=()=>{if(confirm('ล้างข้อมูลทั้งหมด?')){S=blank();calM=null;pick=null;chooseDay=null;save();render()}};
+$('vList').onclick=()=>{view='list';pick=null;chooseDay=null;render()};
+$('vCal').onclick=()=>{view='cal';if(S.start)calM=initCalM(calc());render()};
+document.addEventListener('change',e=>{const t=e.target.dataset.t;if(t)setDate(t,e.target.dataset.n,e.target.value)});
+document.addEventListener('click',e=>{
+  const el=e.target;
+  if(el.id==='cancel'){pick=null;chooseDay=null;render();return}
+  if(el.dataset.as){const[t,n]=el.dataset.as.split('|'),d=chooseDay;chooseDay=null;setDate(t,n,d);return}
+  if(el.id==='unset'){const p=pick;pick=null;setDate(p.t,p.n,'');return}
+  if(el.dataset.nav){if(!calM)calM=initCalM(calc());const[y,m]=calM.split('-').map(Number),d=new Date(Date.UTC(y,m-1+ +el.dataset.nav,1));calM=d.toISOString().slice(0,7);render();return}
+  if(el.dataset.pt){pick={t:el.dataset.pt,n:el.dataset.pn};chooseDay=null;render();return}
+  const cell=el.closest('[data-day]');
+  if(cell&&pick){const p=pick;pick=null;setDate(p.t,p.n,cell.dataset.day)}
+  else if(cell){chooseDay=cell.dataset.day;render()}
+});
+render();
+</script></body></html>

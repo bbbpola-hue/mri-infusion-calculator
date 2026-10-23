@@ -77,9 +77,9 @@ button.ok{margin-left:6px;padding:4px 10px}
 </header>
 
 <div class="box row">
-  <label>ชื่อ / HN <input id="name" placeholder="เช่น HN 123456"></label>
-  <label>วันให้ยาครั้งแรก <input type="date" id="start"></label>
-  <label><input type="checkbox" id="opt3"> MRI ก่อนครั้งที่ 3</label>
+  <label>ชื่อ / HN <input id="name" autocomplete="off" placeholder="เช่น HN 123456"></label>
+  <label>วันให้ยาครั้งแรก <input type="date" id="start" autocomplete="off"></label>
+  <label><input type="checkbox" id="opt3" autocomplete="off"> MRI ก่อนครั้งที่ 3</label>
   <button id="reset">ล้างข้อมูล</button>
 </div>
 
@@ -106,9 +106,9 @@ let view='list',chooseDay=null,pick=null,calM=null;
 const $=id=>document.getElementById(id);
 const blank=()=>({name:'',start:'',dose:{},mri:{},opt3:false});
 let S=blank();
-const save=()=>{try{localStorage.leqembi=JSON.stringify(S)}catch(e){}};
-const load=()=>{try{const o=JSON.parse(localStorage.leqembi||'null');S=Object.assign(blank(),o&&typeof o==='object'?o:{});S.dose=S.dose||{};S.mri=S.mri||{};S.name=S.name||''}catch(e){S=blank()}};
-load();
+// ไม่เก็บข้อมูลผู้ป่วยในเครื่อง: ล้างทุกครั้งที่เปิดหรือรีเฟรช
+const save=()=>{};
+try{localStorage.removeItem('leqembi')}catch(e){}
 const esc=s=>String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const add=(d,n)=>new Date(new Date(d+'T00:00:00Z').getTime()+n*86400000).toISOString().slice(0,10);
 const diff=(a,b)=>Math.floor((new Date(a+'T00:00:00Z')-new Date(b+'T00:00:00Z'))/86400000);

@@ -147,7 +147,7 @@ function listView(c){
   c.d.forEach(x=>{
     const mm=c.m.find(m=>m.k===x.n);
     if(mm)h+=`<tr class="m"><td colspan="4"><b>ตรวจ MRI ก่อนให้ยาครั้งที่ ${mm.k}</b><br>ระหว่าง ${th(mm.from)} ถึง ${th(mm.to)} &nbsp; <input type="date" data-t="mri" data-n="${mm.k}" value="${mm.a}" placeholder="ยังไม่ได้ทำ"></td></tr>`;
-    h+=`<tr><td>${x.n}</td><td>${th(x.e)}</td><td><input type="date" data-t="dose" data-n="${x.n}" value="${x.a||x.e}" class="${x.a?'has':'pend'}" title="${x.a?'วันทำจริง':'ยังไม่ยืนยัน — แตะ ✓ ถ้าให้ยาตามวันนัด หรือเลือกวันอื่น'}">${x.a?'':`<button class="ok" data-ok="${x.n}" data-d="${x.e}" title="ยืนยันว่าให้ยาตามวันนัด">✓</button>`}</td><td>${x.p!==x.e?'⚠️ เลื่อน':''}</td></tr>`
+    h+=`<tr><td>${x.n}</td><td>${th(x.e)}</td><td><input type="date" data-t="dose" data-n="${x.n}" value="${x.a||x.e}" class="${x.a?'has':'pend'}" title="${x.a?'วันทำจริง':'ยังไม่ยืนยัน — แตะ ✓ ถ้าให้ยาตามวันนัด หรือเลือกวันอื่น'}">${x.a?'':`<button class="ok" data-ok="${x.n}" data-d="${x.e}" title="ยืนยันว่าให้ยาตามวันนัด">✓</button>`}</td><td>${x.a&&x.a!==x.e?'⚠️ เลื่อน':''}</td></tr>`
   });
   h+='</table></div>';
   $('view').innerHTML=h
